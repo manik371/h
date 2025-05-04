@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -10,53 +11,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <style>
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-    </style>
 </head>
 <body>
     <div id="drag-container">
         <div id="spin-container">
-            <img src="1.jpg" alt="">
-            <img src="2.jpg" alt="">
-            <img src="3.jpg" alt="">
-            <img src="file:///C:/Users/a/Desktop/love/love/image/4.jpg" alt="">
-            <img src="file:///C:/Users/a/Desktop/love/love/image/5.jpg" alt="">
-            <img src="6.jpg" alt="">
-            <img src="7.jpg" alt="">
-            <img src="8.jpg" alt="">
-            <img src="9.jpg" alt="">
-            <img src="10.jpg" alt="">
-            <p>Happy Birthday Chotki</p>
+            <img src="./images/r1.png" alt="">
+            <img src="./images/r2.png" alt="">
+            <img src="./images/r3.png" alt="">
+            <img src="./images/r4.png" alt="">
+            <img src="./images/r5.jpg" alt="">
+            <img src="./images/r6.png" alt="">
+            <img src="./images/r7.png" alt="">
+            <img src="./images/r8.png" alt="">
+            <img src="./images/r9.png" alt="">
+            <img src="./images/r10.png" alt="">
+            <p>Happy Birthday Rashmii</p>
         </div>
         <div id="ground"></div>
     </div>
+    
+    <div id="music-container"></div>
+    <!-- <div id="canva">
+        <canvas id="canvas"></canvas>
+    </div> -->
 
-    <canvas id="canvas"></canvas>
-
-    <audio id="myAudio">
-        <source src="love_music_setlove.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+    <!-- Audio tự động phát -->
+    <audio id="myAudio" autoplay playsinline>
+        <source src="music/setlove.mp3" type="audio/mpeg">
+        <source src="music/setlove.ogg" type="audio/ogg">
     </audio>
 
     <script src="main.js"></script>
 
     <script>
-        window.onload = function () {
-            // Allow audio to start after user click
-            document.body.addEventListener('click', function () {
-                var audio = document.getElementById("myAudio");
-                audio.play().catch(function (e) {
-                    console.log("Autoplay blocked:", e);
-                });
-            }, { once: true });
+        window.onload = function() {
+            var audio = document.getElementById("myAudio");
+            audio.muted = false;
+            audio.play().catch(function(e) {
+                console.log('Audio playback failed:', e);
+            });
 
-            // Fireworks and hearts
+            // Hiệu ứng pháo hoa và trái tim
             const canvas = document.getElementById("canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth;
@@ -129,18 +124,21 @@
                 fireworks.forEach((firework, index) => {
                     firework.draw();
                     firework.update();
-                    if (firework.life <= 0) fireworks.splice(index, 1);
+                    if (firework.life <= 0) {
+                        fireworks.splice(index, 1);
+                    }
                 });
 
                 hearts.forEach((heart, index) => {
                     heart.draw();
                     heart.update();
-                    if (heart.opacity <= 0) hearts.splice(index, 1);
+                    if (heart.opacity <= 0) {
+                        hearts.splice(index, 1);
+                    }
                 });
 
                 requestAnimationFrame(animate);
             }
-
             animate();
         };
     </script>
